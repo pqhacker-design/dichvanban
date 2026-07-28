@@ -1,0 +1,6 @@
+{
+  "name": "AI Document Translator Pro",
+  "description": "Professional AI-powered document translation tool with format preservation, Gemini 3 models, OCR, side-by-side view, glossary management, and multi-format export.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
