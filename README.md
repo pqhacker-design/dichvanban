@@ -121,17 +121,17 @@ app.listen(PORT, '0.0.0.0', () => {
     console.log(`AI Document Translator Pro running on http://localhost:${PORT}`);
 });
 ## Hãy sửa thành:
-const PORT = Number(process.env.PORT) || 3000;
+`const PORT = Number(process.env.PORT) || 3000;`
 và
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on port ${PORT}`);
+`app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);`
 });
 ## Cấu hình Render
 Tạo Web Service với các thông số:
 Mục	Giá trị
-Runtime	Node
-Build Command:	npm install && npm run build
-Start Command:	npm start
+Runtime:	`Node`
+Build Command:	`npm install && npm run build`
+Start Command:	`npm start`
 ## Thêm biến môi trường:
-NODE_ENV=production
-GEMINI_API_KEY=...
+`NODE_ENV=production`
+`GEMINI_API_KEY=...`
