@@ -112,3 +112,26 @@ npm start
 ### Deploy Lên Cloud Run / Render / Railway / Docker / Ubuntu VPS:
 Ứng dụng được thiết kế dạng Node.js Express server tiêu chuẩn chạy trên cổng 3000 (`0.0.0.0:3000`).
 Cung cấp biến môi trường `GEMINI_API_KEY` trong bảng điều khiển Cloud/Docker container.
+### Chú ý
+## 1. server.ts
+Hiện tại bạn đang để:
+const PORT = 3000;
+và
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`AI Document Translator Pro running on http://localhost:${PORT}`);
+});
+## Hãy sửa thành:
+const PORT = Number(process.env.PORT) || 3000;
+và
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
+});
+## Cấu hình Render
+Tạo Web Service với các thông số:
+Mục	Giá trị
+Runtime	Node
+Build Command:	npm install && npm run build
+Start Command:	npm start
+## Thêm biến môi trường:
+NODE_ENV=production
+GEMINI_API_KEY=...
