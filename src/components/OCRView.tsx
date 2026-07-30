@@ -70,15 +70,15 @@ export const OCRView: React.FC<OCRViewProps> = ({ targetLang, setTargetLang }) =
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 tracking-tight flex items-center gap-2">
-            <ScanText className="w-7 h-7 text-indigo-600" /> Optical Character Recognition (OCR) & Translation
+            <ScanText className="w-7 h-7 text-indigo-600" /> Nhận Dạng Chữ OCR & Dịch Thuật
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Extract text directly from scanned document photos, PDFs, or infographics using Gemini Vision AI.
+            Trích xuất và dịch thuật bản in, ảnh chụp tài liệu, PDF hoặc infographics bằng AI Gemini Vision.
           </p>
         </div>
 
         <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 p-2 rounded-xl border border-slate-200 dark:border-slate-700">
-          <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Target Language:</span>
+          <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Ngôn Ngữ Đích:</span>
           <select
             value={targetLang}
             onChange={(e) => setTargetLang(e.target.value)}
@@ -98,7 +98,7 @@ export const OCRView: React.FC<OCRViewProps> = ({ targetLang, setTargetLang }) =
         {/* Upload & Image Canvas Box */}
         <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 space-y-4">
           <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-            <FileImage className="w-4 h-4 text-indigo-500" /> Image Source
+            <FileImage className="w-4 h-4 text-indigo-500" /> Hình Ảnh Đầu Vào
           </h3>
 
           {!previewUrl ? (
@@ -115,9 +115,9 @@ export const OCRView: React.FC<OCRViewProps> = ({ targetLang, setTargetLang }) =
               />
               <Upload className="w-10 h-10 text-indigo-500 mb-3" />
               <p className="text-sm font-bold text-slate-800 dark:text-slate-200">
-                Upload Scanned Photo or PDF Page
+                Tải Ảnh Tài Liệu Hoặc Trang PDF
               </p>
-              <p className="text-xs text-slate-400 mt-1">PNG, JPG, WEBP, BMP up to 20MB</p>
+              <p className="text-xs text-slate-400 mt-1">Hỗ trợ PNG, JPG, WEBP, BMP tối đa 20MB</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -130,7 +130,7 @@ export const OCRView: React.FC<OCRViewProps> = ({ targetLang, setTargetLang }) =
                   onClick={() => fileInputRef.current?.click()}
                   className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-semibold"
                 >
-                  Change Image
+                  Đổi Ảnh Khác
                 </button>
                 <input
                   type="file"
@@ -147,11 +147,11 @@ export const OCRView: React.FC<OCRViewProps> = ({ targetLang, setTargetLang }) =
                 >
                   {processing ? (
                     <>
-                      <RefreshCw className="w-4 h-4 animate-spin" /> Scanning with Gemini Vision...
+                      <RefreshCw className="w-4 h-4 animate-spin" /> Đang Quét Bằng Gemini Vision...
                     </>
                   ) : (
                     <>
-                      <Sparkles className="w-4 h-4" /> Run OCR & Translate
+                      <Sparkles className="w-4 h-4" /> Quét OCR & Dịch Thuật
                     </>
                   )}
                 </button>
@@ -165,7 +165,7 @@ export const OCRView: React.FC<OCRViewProps> = ({ targetLang, setTargetLang }) =
           <div>
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-                <Eye className="w-4 h-4 text-emerald-500" /> Extracted & Translated Output
+                <Eye className="w-4 h-4 text-emerald-500" /> Kết Quả Trích Xuất & Dịch Thuật
               </h3>
               {(translatedText || extractedText) && (
                 <button
@@ -173,7 +173,7 @@ export const OCRView: React.FC<OCRViewProps> = ({ targetLang, setTargetLang }) =
                   className="text-xs text-slate-500 hover:text-indigo-600 flex items-center gap-1 font-semibold"
                 >
                   {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                  {copied ? 'Copied' : 'Copy'}
+                  {copied ? 'Đã chép' : 'Sao chép'}
                 </button>
               )}
             </div>
@@ -182,7 +182,7 @@ export const OCRView: React.FC<OCRViewProps> = ({ targetLang, setTargetLang }) =
               {translatedText ? (
                 <div>
                   <h4 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 mb-1">
-                    TRANSLATED TEXT ({getLanguageName(targetLang)})
+                    VĂN BẢN ĐÃ DỊCH ({getLanguageName(targetLang)})
                   </h4>
                   <div className="p-4 rounded-xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-500/20 text-xs leading-relaxed text-slate-800 dark:text-slate-200 whitespace-pre-wrap">
                     {translatedText}
@@ -190,14 +190,14 @@ export const OCRView: React.FC<OCRViewProps> = ({ targetLang, setTargetLang }) =
                 </div>
               ) : extractedText ? (
                 <div>
-                  <h4 className="text-xs font-bold text-slate-500 mb-1">RAW EXTRACTED OCR TEXT</h4>
+                  <h4 className="text-xs font-bold text-slate-500 mb-1">VĂN BẢN OCR NGUYÊN BẢN</h4>
                   <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs leading-relaxed text-slate-800 dark:text-slate-200 whitespace-pre-wrap">
                     {extractedText}
                   </div>
                 </div>
               ) : (
                 <div className="h-full flex items-center justify-center text-xs text-slate-400 italic">
-                  Upload an image and click "Run OCR & Translate" to extract document text.
+                  Tải ảnh lên và bấm "Quét OCR & Dịch Thuật" để trích xuất văn bản tài liệu.
                 </div>
               )}
             </div>
