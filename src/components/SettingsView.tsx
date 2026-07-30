@@ -37,7 +37,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   const handleClearKey = () => {
     clearStoredApiKey();
     setUserKeyInput('');
-    setKeyMessage({ success: true, text: 'Đã xóa API Key cá nhân. Dùng cấu hình mặc định.' });
+    setKeyMessage({ success: true, text: 'Đã xóa API Key. Bạn cần nhập API Key mới để sử dụng ứng dụng.' });
     setTimeout(() => setKeyMessage(null), 3000);
   };
 
@@ -105,10 +105,10 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           >
             {apiKeyConfigured ? (
               <>
-                <CheckCircle2 className="w-4 h-4" /> {getStoredApiKey() ? 'API Key Cá Nhân Active' : 'API Key Mặc Định System'}
+                <CheckCircle2 className="w-4 h-4" /> API Key Cá Nhân Active
               </>
             ) : (
-              'Chưa Có API Key'
+              'Chưa Nhập API Key (Bắt buộc)'
             )}
           </div>
         </div>
