@@ -98,10 +98,10 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
           </div>
           <div>
             <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">
-              Cấu Hình Gemini API Key Cá Nhân
+              Cấu Hình Gemini API Key Cá Nhân (Bắt buộc)
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Nhập khóa API Gemini của bạn để bắt đầu dịch tài liệu
+              Ứng dụng yêu cầu nhập Gemini API Key của bạn để sử dụng các tính năng dịch AI & OCR.
             </p>
           </div>
         </div>
