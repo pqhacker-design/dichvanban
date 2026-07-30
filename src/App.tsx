@@ -45,8 +45,12 @@ export default function App() {
 
   const checkApiKeyStatus = () => {
     const customKey = getStoredApiKey();
+    if (!customKey) {
+      setApiKeyConfigured(false);
+      return;
+    }
     fetch('/api/health', {
-      headers: customKey ? { 'x-gemini-api-key': customKey } : {},
+      headers: { 'x-gemini-api-key': customKey },
     })
       .then((res) => res.json())
       .then((data) => {
