@@ -77,10 +77,10 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       {/* Header */}
       <div className="pb-6 border-b border-slate-200 dark:border-slate-800">
         <h1 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 tracking-tight flex items-center gap-2">
-          <Settings className="w-7 h-7 text-indigo-600" /> Platform & AI Settings
+          <Settings className="w-7 h-7 text-indigo-600" /> Cấu Hình Nền Tảng & AI
         </h1>
         <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-          Configure default translation parameters, user API key credentials, and custom translation directives.
+          Tùy chỉnh thông số dịch mặc định, quản lý API Key người dùng và nguyên tắc bảo toàn định dạng.
         </p>
       </div>
 
@@ -192,7 +192,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       {/* Default AI Model Preference */}
       <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 space-y-4 shadow-sm">
         <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-          <Sliders className="w-4 h-4 text-indigo-500" /> Default Model Preference
+          <Sliders className="w-4 h-4 text-indigo-500" /> Tùy Chọn Mô Hình Mặc Định
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
@@ -206,7 +206,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             }`}
           >
             <p className="font-bold text-sm">Gemini 3.6 Flash</p>
-            <p className="text-[11px] text-slate-400 font-normal">Fast, high throughput, general document translation.</p>
+            <p className="text-[11px] text-slate-400 font-normal">Tốc độ cực nhanh, hiệu năng cao, tối ưu dịch tài liệu thông thường.</p>
           </button>
 
           <button
@@ -219,7 +219,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             }`}
           >
             <p className="font-bold text-sm">Gemini 3.1 Pro</p>
-            <p className="text-[11px] text-slate-400 font-normal">Complex formatting, academic & legal reasoning.</p>
+            <p className="text-[11px] text-slate-400 font-normal">Xử lý định dạng phức tạp, lập luận chuyên sâu cho tài liệu pháp lý & học thuật.</p>
           </button>
 
           <button
@@ -232,7 +232,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
             }`}
           >
             <p className="font-bold text-sm">Gemini Thinking High</p>
-            <p className="text-[11px] text-slate-400 font-normal">High logical rigor for equations & technical code.</p>
+            <p className="text-[11px] text-slate-400 font-normal">Độ chính xác logic cao cho công thức toán học & mã nguồn phần mềm.</p>
           </button>
         </div>
       </div>
@@ -240,14 +240,14 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       {/* Format Preservation Toggles */}
       <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 space-y-4 shadow-sm">
         <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-          <ShieldCheck className="w-4 h-4 text-emerald-500" /> Format & Element Protection
+          <ShieldCheck className="w-4 h-4 text-emerald-500" /> Nguyên Tắc Bảo Toàn Bố Cục & Phần Tử
         </h3>
 
         <div className="space-y-3 text-xs">
           <label className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer">
             <div>
-              <span className="font-bold text-slate-800 dark:text-slate-200">Preserve Typography & Formatting</span>
-              <p className="text-[11px] text-slate-400">Keep headings, bold, italics, tables, and bullet points unchanged.</p>
+              <span className="font-bold text-slate-800 dark:text-slate-200">Bảo Toàn Kiểu Chữ & Bố Cục Trang</span>
+              <p className="text-[11px] text-slate-400">Giữ nguyên tiêu đề, in đậm, nghiêng, bảng biểu và danh sách dạng dấu chấm.</p>
             </div>
             <input
               type="checkbox"
@@ -259,8 +259,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
 
           <label className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer">
             <div>
-              <span className="font-bold text-slate-800 dark:text-slate-200">Protect Math Formulas (LaTeX / MathML)</span>
-              <p className="text-[11px] text-slate-400">Never alter mathematical equations or symbols ($...$, $$...$$).</p>
+              <span className="font-bold text-slate-800 dark:text-slate-200">Bảo Vệ Công Thức Toán Học (LaTeX / MathML)</span>
+              <p className="text-[11px] text-slate-400">Tuyệt đối không biến đổi các công thức toán hoặc ký hiệu ($...$, $$...$$).</p>
             </div>
             <input
               type="checkbox"
@@ -272,8 +272,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
 
           <label className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 cursor-pointer">
             <div>
-              <span className="font-bold text-slate-800 dark:text-slate-200">Protect Programming Code Blocks</span>
-              <p className="text-[11px] text-slate-400">Keep code syntax, variable names, and code snippets untranslated.</p>
+              <span className="font-bold text-slate-800 dark:text-slate-200">Bảo Vệ Khối Mã Nguồn Lập Trình</span>
+              <p className="text-[11px] text-slate-400">Giữ nguyên cú pháp lập trình, tên biến và các đoạn code mẫu.</p>
             </div>
             <input
               type="checkbox"
