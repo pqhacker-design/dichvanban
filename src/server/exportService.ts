@@ -223,7 +223,7 @@ export async function generateExportContent(
           if (hMatch) {
             const levelNum = parseInt(hMatch[1], 10);
             const headingText = cleanResidualHtmlTags(hMatch[2]);
-            const headingMap: Record<number, typeof HeadingLevel.HEADING_1> = {
+            const headingMap: Record<number, (typeof HeadingLevel)[keyof typeof HeadingLevel]> = {
               1: HeadingLevel.HEADING_1,
               2: HeadingLevel.HEADING_2,
               3: HeadingLevel.HEADING_3,
