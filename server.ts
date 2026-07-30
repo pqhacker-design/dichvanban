@@ -9,7 +9,7 @@ import { store } from './src/server/store';
 import { GeminiModelId, TranslationDomain } from './src/types';
 
 const app = express();
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = 3000;
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
@@ -23,12 +23,11 @@ const upload = multer({
 // API Routes
 app.get('/api/health', (req, res) => {
   const headerKey = req.headers['x-gemini-api-key'] as string;
-  const envKey = process.env.GEMINI_API_KEY;
-  const activeKey = headerKey?.trim() || envKey?.trim();
+  const activeKey = headerKey?.trim();
   res.json({
     status: 'ok',
     geminiKeyConfigured: Boolean(activeKey),
-    isCustomKey: Boolean(headerKey?.trim()),
+    isCustomKey: true,
     models: ['gemini-3.6-flash', 'gemini-3.1-pro-preview', 'gemini-3.6-flash-thinking'],
   });
 });
