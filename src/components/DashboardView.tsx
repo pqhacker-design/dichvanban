@@ -66,26 +66,26 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
         <div className="relative z-10 max-w-2xl space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold tracking-wide border border-white/20">
             <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-spin" />
-            <span>Gemini 3 Pro & Flash Active</span>
+            <span>Gemini 3 Pro & Flash Đang Hoạt Động</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            AI Document Translation & Format Preservation
+            Dịch Tài Liệu AI & Bảo Toàn Định Dạng
           </h1>
           <p className="text-blue-100 text-sm leading-relaxed">
-            Translate multi-format documents (DOCX, PDF, XLSX, PPTX, HTML, MD) with exact layout, headings, tables, code blocks, and math equations intact.
+            Dịch tài liệu đa định dạng (DOCX, PDF, XLSX, PPTX, HTML, MD) giữ nguyên 100% bố cục, tiêu đề, bảng biểu, đoạn mã và công thức toán học.
           </p>
           <div className="pt-2 flex flex-wrap gap-3">
             <button
               onClick={() => setActiveTab('document')}
               className="px-5 py-2.5 rounded-xl bg-white text-indigo-700 font-bold text-sm hover:bg-blue-50 transition-colors shadow-lg shadow-black/10 flex items-center gap-2"
             >
-              <Upload className="w-4 h-4" /> Translate Document
+              <Upload className="w-4 h-4" /> Dịch Tài Liệu ngay
             </button>
             <button
               onClick={() => setActiveTab('text')}
               className="px-5 py-2.5 rounded-xl bg-indigo-800/60 hover:bg-indigo-800 text-white font-semibold text-sm border border-white/20 transition-colors flex items-center gap-2"
             >
-              <Languages className="w-4 h-4" /> Fast Text Translation
+              <Languages className="w-4 h-4" /> Dịch Văn Bản Nhanh
             </button>
           </div>
         </div>
@@ -96,7 +96,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
         <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              Total Documents
+              Tổng Số Tài Liệu
             </span>
             <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
               <FileText className="w-5 h-5" />
@@ -110,13 +110,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
               <TrendingUp className="w-3.5 h-3.5" /> +14.2%
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-1">Processed across formats</p>
+          <p className="text-xs text-slate-400 mt-1">Đã xử lý đa định dạng</p>
         </div>
 
         <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              Total Translations
+              Tổng Lượt Dịch
             </span>
             <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
               <Languages className="w-5 h-5" />
@@ -130,13 +130,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
               <TrendingUp className="w-3.5 h-3.5" /> +28.5%
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-1">Document & text requests</p>
+          <p className="text-xs text-slate-400 mt-1">Tài liệu & văn bản trực tiếp</p>
         </div>
 
         <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              Processed Volume
+              Dung Lượng Xử Lý
             </span>
             <div className="p-2.5 rounded-xl bg-violet-500/10 text-violet-600 dark:text-violet-400">
               <HardDrive className="w-5 h-5" />
@@ -146,15 +146,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
             <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100">
               {loading ? '...' : formatSize(stats?.totalProcessedBytes || 0)}
             </h3>
-            <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">High Bandwidth</span>
+            <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400">Băng Thông Cao</span>
           </div>
-          <p className="text-xs text-slate-400 mt-1">Chunked processing ready</p>
+          <p className="text-xs text-slate-400 mt-1">Sẵn sàng xử lý khối lớn</p>
         </div>
 
         <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-              Top Language Pair
+              Cặp Ngôn Ngữ Hàng Đầu
             </span>
             <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
               <Zap className="w-5 h-5" />
@@ -166,7 +166,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
             </h3>
           </div>
           <p className="text-xs text-slate-400 mt-1">
-            {stats?.topLanguages[0]?.count || 24} translations completed
+            {stats?.topLanguages[0]?.count || 24} lượt dịch hoàn thành
           </p>
         </div>
       </div>
@@ -177,12 +177,12 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-base font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-                <BarChart3 className="w-5 h-5 text-indigo-500" /> Translation Activity Overview
+                <BarChart3 className="w-5 h-5 text-indigo-500" /> Biểu Đồ Hoạt Động Dịch Thuật
               </h3>
-              <p className="text-xs text-slate-400">Daily document & word count throughput</p>
+              <p className="text-xs text-slate-400">Số lượng tài liệu & từ dịch hàng ngày</p>
             </div>
             <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
-              7-Day Metrics
+              Thống Kê 7 Ngày
             </span>
           </div>
 
@@ -206,7 +206,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
                     color: '#f8fafc',
                   }}
                 />
-                <Area type="monotone" dataKey="words" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorWords)" name="Words" />
+                <Area type="monotone" dataKey="words" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorWords)" name="Số từ" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -215,8 +215,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
         {/* Top Languages Distribution */}
         <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-4">
           <div>
-            <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">Top Language Pairs</h3>
-            <p className="text-xs text-slate-400">Most requested document translations</p>
+            <h3 className="text-base font-bold text-slate-800 dark:text-slate-100">Cặp Ngôn Ngữ Phổ Biến</h3>
+            <p className="text-xs text-slate-400">Các ngôn ngữ được dịch nhiều nhất</p>
           </div>
 
           <div className="h-64 w-full">
@@ -233,7 +233,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
                     color: '#f8fafc',
                   }}
                 />
-                <Bar dataKey="count" fill="#3b82f6" radius={[0, 6, 6, 0]} name="Requests" />
+                <Bar dataKey="count" fill="#3b82f6" radius={[0, 6, 6, 0]} name="Yêu cầu" />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -245,15 +245,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-base font-bold text-slate-800 dark:text-slate-100 flex items-center gap-2">
-              <Clock className="w-5 h-5 text-indigo-500" /> Recent Document Activity
+              <Clock className="w-5 h-5 text-indigo-500" /> Tác Vụ Dịch Gần Đây
             </h3>
-            <p className="text-xs text-slate-400">Latest completed translation jobs</p>
+            <p className="text-xs text-slate-400">Các lượt dịch tài liệu mới nhất</p>
           </div>
           <button
             onClick={() => setActiveTab('history')}
             className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
           >
-            View All History <ArrowRight className="w-3.5 h-3.5" />
+            Xem Lịch Sử Dịch <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
@@ -261,19 +261,19 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                <th className="py-3 px-4">Document Name</th>
-                <th className="py-3 px-4">Format</th>
-                <th className="py-3 px-4">Language Pair</th>
-                <th className="py-3 px-4">Words</th>
-                <th className="py-3 px-4">Status</th>
-                <th className="py-3 px-4">Date</th>
+                <th className="py-3 px-4">Tên Tài Liệu</th>
+                <th className="py-3 px-4">Định Dạng</th>
+                <th className="py-3 px-4">Cặp Ngôn Ngữ</th>
+                <th className="py-3 px-4">Số Từ</th>
+                <th className="py-3 px-4">Trạng Thái</th>
+                <th className="py-3 px-4">Ngày Dịch</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 text-xs text-slate-700 dark:text-slate-300 font-medium">
               {history.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="py-8 text-center text-slate-400">
-                    No history records found. Translate a document to view history here!
+                    Chưa có lịch sử dịch. Hãy dịch một tài liệu để xem tại đây!
                   </td>
                 </tr>
               ) : (
@@ -295,11 +295,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ setActiveTab }) =>
                     <td className="py-3.5 px-4">{item.wordCount.toLocaleString()}</td>
                     <td className="py-3.5 px-4">
                       <span className="inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                        Completed
+                        Hoàn thành
                       </span>
                     </td>
                     <td className="py-3.5 px-4 text-slate-400">
-                      {new Date(item.createdAt).toLocaleDateString()}
+                      {new Date(item.createdAt).toLocaleDateString('vi-VN')}
                     </td>
                   </tr>
                 ))
