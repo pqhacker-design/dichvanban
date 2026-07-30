@@ -93,10 +93,10 @@ export const GlossaryView: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 tracking-tight flex items-center gap-2">
-            <BookMarked className="w-7 h-7 text-indigo-600" /> Glossary & Do-Not-Translate Rules
+            <BookMarked className="w-7 h-7 text-indigo-600" /> Bộ Thuật Ngữ & Quy Tắc Không Dịch
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Enforce custom domain term mappings and protect brand names, emails, code, or equations during AI translation.
+            Bắt buộc sử dụng thuật ngữ chuyên ngành cố định và bảo vệ tên thương hiệu, email, mã nguồn hoặc công thức khi dịch AI.
           </p>
         </div>
 
@@ -110,7 +110,7 @@ export const GlossaryView: React.FC = () => {
                 : 'text-slate-500'
             }`}
           >
-            Glossary Dictionary ({glossary.length})
+            Từ Điển Thuật Ngữ ({glossary.length})
           </button>
           <button
             onClick={() => setActiveTab('rules')}
@@ -120,7 +120,7 @@ export const GlossaryView: React.FC = () => {
                 : 'text-slate-500'
             }`}
           >
-            Do Not Translate ({rules.length})
+            Từ Không Được Dịch ({rules.length})
           </button>
         </div>
       </div>
@@ -130,41 +130,41 @@ export const GlossaryView: React.FC = () => {
           {/* Add Form */}
           <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 space-y-4 shadow-sm">
             <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-              <Plus className="w-4 h-4 text-indigo-500" /> Add Glossary Term
+              <Plus className="w-4 h-4 text-indigo-500" /> Thêm Thuật Ngữ
             </h3>
 
             <form onSubmit={handleAddGlossary} className="space-y-3 text-xs">
               <div>
-                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Source Term</label>
+                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Thuật Ngữ Gốc</label>
                 <input
                   type="text"
                   value={sourceTerm}
                   onChange={(e) => setSourceTerm(e.target.value)}
-                  placeholder="e.g. Giáo dục phổ thông"
+                  placeholder="Ví dụ: Giáo dục phổ thông"
                   className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 focus:outline-none"
                   required
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Target Term</label>
+                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Thuật Ngữ Dịch Bắt Buộc</label>
                 <input
                   type="text"
                   value={targetTerm}
                   onChange={(e) => setTargetTerm(e.target.value)}
-                  placeholder="e.g. General Education"
+                  placeholder="Ví dụ: General Education"
                   className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 focus:outline-none"
                   required
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Usage Notes (Optional)</label>
+                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Ghi Chú Sử Dụng (Tùy chọn)</label>
                 <input
                   type="text"
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="e.g. Mandatory for education papers"
+                  placeholder="Ví dụ: Bắt buộc cho báo cáo giáo dục"
                   className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 focus:outline-none"
                 />
               </div>
@@ -173,7 +173,7 @@ export const GlossaryView: React.FC = () => {
                 type="submit"
                 className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700 transition-colors shadow-md shadow-indigo-600/20"
               >
-                Save Glossary Term
+                Lưu Thuật Ngữ
               </button>
             </form>
           </div>
@@ -183,10 +183,10 @@ export const GlossaryView: React.FC = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                  <th className="py-3 px-4">Source Term</th>
-                  <th className="py-3 px-4">Mandatory Target Term</th>
-                  <th className="py-3 px-4">Notes</th>
-                  <th className="py-3 px-4 text-right">Action</th>
+                  <th className="py-3 px-4">Thuật Ngữ Gốc</th>
+                  <th className="py-3 px-4">Bản Dịch Cố Định</th>
+                  <th className="py-3 px-4">Ghi Chú</th>
+                  <th className="py-3 px-4 text-right">Thao Tác</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 text-xs text-slate-700 dark:text-slate-300 font-medium">
@@ -199,6 +199,7 @@ export const GlossaryView: React.FC = () => {
                       <button
                         onClick={() => handleDeleteGlossary(item.id)}
                         className="p-1.5 rounded-lg bg-red-50 dark:bg-red-950/50 text-red-600 hover:bg-red-100 transition-colors"
+                        title="Xóa thuật ngữ"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -214,35 +215,35 @@ export const GlossaryView: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 space-y-4 shadow-sm">
             <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-              <ShieldAlert className="w-4 h-4 text-indigo-500" /> Protect Untranslated String
+              <ShieldAlert className="w-4 h-4 text-indigo-500" /> Thêm Từ Giữ Nguyên
             </h3>
 
             <form onSubmit={handleAddRule} className="space-y-3 text-xs">
               <div>
-                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Exact Text String</label>
+                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Chuỗi Văn Bản Chính Xác</label>
                 <input
                   type="text"
                   value={ruleText}
                   onChange={(e) => setRuleText(e.target.value)}
-                  placeholder="e.g. OpenAI or user@company.com"
+                  placeholder="Ví dụ: OpenAI hoặc contact@company.com"
                   className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 focus:outline-none"
                   required
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Category</label>
+                <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Phân Loại</label>
                 <select
                   value={ruleCategory}
                   onChange={(e) => setRuleCategory(e.target.value as any)}
                   className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 focus:outline-none"
                 >
-                  <option value="brand">Brand / Brand Name</option>
-                  <option value="email">Email Address</option>
-                  <option value="url">URL / Web Link</option>
-                  <option value="code">Programming Code Keyword</option>
-                  <option value="math">LaTeX / Math Expression</option>
-                  <option value="product_id">Product Code / Serial ID</option>
+                  <option value="brand">Thương hiệu / Tên riêng</option>
+                  <option value="email">Địa chỉ Email</option>
+                  <option value="url">Đường dẫn URL / Web</option>
+                  <option value="code">Từ khóa Mã nguồn / Lập trình</option>
+                  <option value="math">Công thức Toán / LaTeX</option>
+                  <option value="product_id">Mã sản phẩm / Số Serial</option>
                 </select>
               </div>
 
@@ -250,7 +251,7 @@ export const GlossaryView: React.FC = () => {
                 type="submit"
                 className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 text-white font-bold hover:bg-indigo-700 transition-colors shadow-md shadow-indigo-600/20"
               >
-                Add Rule
+                Thêm Quy Tắc
               </button>
             </form>
           </div>
@@ -259,9 +260,9 @@ export const GlossaryView: React.FC = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                  <th className="py-3 px-4">Protected String</th>
-                  <th className="py-3 px-4">Category</th>
-                  <th className="py-3 px-4 text-right">Action</th>
+                  <th className="py-3 px-4">Chuỗi Được Bảo Vệ</th>
+                  <th className="py-3 px-4">Phân Loại</th>
+                  <th className="py-3 px-4 text-right">Thao Tác</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 text-xs text-slate-700 dark:text-slate-300 font-medium">
@@ -277,6 +278,7 @@ export const GlossaryView: React.FC = () => {
                       <button
                         onClick={() => handleDeleteRule(rule.id)}
                         className="p-1.5 rounded-lg bg-red-50 dark:bg-red-950/50 text-red-600 hover:bg-red-100 transition-colors"
+                        title="Xóa quy tắc"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
