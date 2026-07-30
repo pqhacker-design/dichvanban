@@ -47,19 +47,19 @@ export const Header: React.FC<HeaderProps> = ({
             className={`flex items-center gap-1.5 text-xs px-3 py-1 rounded-full border transition-all cursor-pointer hover:scale-105 ${
               apiKeyConfigured
                 ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20'
-                : 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20 animate-pulse'
+                : 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20 animate-pulse'
             }`}
-            title="Nhấp để cấu hình API Key"
+            title="Bắt buộc nhập Gemini API Key cá nhân để sử dụng dịch thuật"
           >
             {apiKeyConfigured ? (
               <>
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>{hasCustomKey ? 'API Key Cá Nhân' : 'API Key Mặc Định'}</span>
+                <span>API Key Cá Nhân</span>
               </>
             ) : (
               <>
                 <AlertCircle className="w-3.5 h-3.5" />
-                <span>Chưa Có API Key</span>
+                <span>Chưa Nhập API Key (Bắt buộc)</span>
               </>
             )}
           </button>
