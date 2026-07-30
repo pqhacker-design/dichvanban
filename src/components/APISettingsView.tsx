@@ -88,7 +88,7 @@ export const APISettingsView: React.FC = () => {
             <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800">
               <span className="text-slate-400">Trạng Thái Gemini Key:</span>
               <span className="font-bold text-emerald-500">
-                {healthData?.geminiKeyConfigured ? 'Hoạt động (Active)' : 'Chưa cấu hình'}
+                {healthData?.geminiKeyConfigured ? 'API Key cá nhân (Active)' : 'Chưa nhập API Key'}
               </span>
             </div>
           </div>
