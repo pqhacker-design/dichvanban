@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: taodekt
+    name: docvanban
     runtime: node
 
     # Gói miễn phí (có thể đổi thành starter hoặc standard nếu cần)
