@@ -2,9 +2,9 @@ import { GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { GeminiModelId, TranslationDomain, GlossaryItem, DoNotTranslateRule } from '../types';
 
 function getGeminiClient(customApiKey?: string) {
-  const apiKey = customApiKey?.trim() || process.env.GEMINI_API_KEY?.trim();
+  const apiKey = customApiKey?.trim();
   if (!apiKey) {
-    throw new Error('Chưa cấu hình Gemini API Key. Vui lòng nhập API Key của bạn trong phần Cài Đặt hoặc thanh Tiêu Đề.');
+    throw new Error('Chưa nhập Gemini API Key cá nhân. Vui lòng bấm vào nút "Nhập API Key" trên thanh tiêu đề hoặc truy cập Cài Đặt để nhập API Key của bạn.');
   }
   return new GoogleGenAI({
     apiKey,
