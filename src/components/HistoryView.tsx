@@ -59,10 +59,10 @@ export const HistoryView: React.FC = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 tracking-tight flex items-center gap-2">
-            <History className="w-7 h-7 text-indigo-600" /> Translation History Records
+            <History className="w-7 h-7 text-indigo-600" /> Lịch Sử Dịch Thuật
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Complete logs of past document & text translations with downloadable records.
+            Nhật ký chi tiết các lượt dịch tài liệu và văn bản đã thực hiện.
           </p>
         </div>
 
@@ -71,7 +71,7 @@ export const HistoryView: React.FC = () => {
             onClick={handleClearAll}
             className="px-4 py-2 rounded-xl bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20 text-xs font-bold hover:bg-red-500/20 transition-colors flex items-center gap-1.5"
           >
-            <Trash2 className="w-3.5 h-3.5" /> Clear All History
+            <Trash2 className="w-3.5 h-3.5" /> Xóa Toàn Bộ Lịch Sử
           </button>
         )}
       </div>
@@ -84,7 +84,7 @@ export const HistoryView: React.FC = () => {
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search documents by name or language..."
+            placeholder="Tìm kiếm tài liệu theo tên hoặc ngôn ngữ..."
             className="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 text-xs text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 focus:outline-none"
           />
         </div>
@@ -93,26 +93,26 @@ export const HistoryView: React.FC = () => {
           onClick={fetchHistory}
           className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 text-xs font-semibold flex items-center gap-1"
         >
-          <RefreshCw className="w-3.5 h-3.5" /> Refresh
+          <RefreshCw className="w-3.5 h-3.5" /> Làm mới
         </button>
       </div>
 
       {/* History Table */}
       <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-x-auto">
         {loading ? (
-          <div className="py-12 text-center text-xs text-slate-400">Loading history logs...</div>
+          <div className="py-12 text-center text-xs text-slate-400">Đang tải lịch sử dịch...</div>
         ) : filteredHistory.length === 0 ? (
-          <div className="py-12 text-center text-xs text-slate-400">No translation records found.</div>
+          <div className="py-12 text-center text-xs text-slate-400">Không tìm thấy bản ghi dịch nào.</div>
         ) : (
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                <th className="py-3 px-4">Document / File</th>
-                <th className="py-3 px-4">Language Pair</th>
-                <th className="py-3 px-4">Model & Domain</th>
-                <th className="py-3 px-4">Word Count</th>
-                <th className="py-3 px-4">Date & Time</th>
-                <th className="py-3 px-4 text-right">Actions</th>
+                <th className="py-3 px-4">Tài Liệu / Tệp</th>
+                <th className="py-3 px-4">Cặp Ngôn Ngữ</th>
+                <th className="py-3 px-4">Mô Hình & Lĩnh Vực</th>
+                <th className="py-3 px-4">Số Từ</th>
+                <th className="py-3 px-4">Ngày Giờ Dịch</th>
+                <th className="py-3 px-4 text-right">Thao Tác</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 text-xs text-slate-700 dark:text-slate-300 font-medium">
@@ -132,22 +132,22 @@ export const HistoryView: React.FC = () => {
                       {item.modelUsed} ({item.domain})
                     </span>
                   </td>
-                  <td className="py-3.5 px-4">{item.wordCount.toLocaleString()} words</td>
+                  <td className="py-3.5 px-4">{item.wordCount.toLocaleString()} từ</td>
                   <td className="py-3.5 px-4 text-slate-400">
-                    {new Date(item.createdAt).toLocaleString()}
+                    {new Date(item.createdAt).toLocaleString('vi-VN')}
                   </td>
                   <td className="py-3.5 px-4 text-right space-x-2">
                     <button
                       onClick={() => setSelectedItem(item)}
                       className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 transition-colors"
-                      title="Preview Translation"
+                      title="Xem trước bản dịch"
                     >
                       <Eye className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => handleDeleteItem(item.id)}
                       className="p-1.5 rounded-lg bg-red-50 dark:bg-red-950/50 text-red-600 dark:text-red-400 hover:bg-red-100 transition-colors"
-                      title="Delete Record"
+                      title="Xóa bản ghi"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -177,14 +177,14 @@ export const HistoryView: React.FC = () => {
 
             <div className="space-y-3 text-xs">
               <div>
-                <span className="font-bold text-slate-400 block mb-1">ORIGINAL CONTENT PREVIEW:</span>
+                <span className="font-bold text-slate-400 block mb-1">XEM TRƯỚC NỘI DUNG GỐC:</span>
                 <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 max-h-32 overflow-y-auto">
                   {selectedItem.originalContentPreview}
                 </div>
               </div>
 
               <div>
-                <span className="font-bold text-indigo-500 block mb-1">TRANSLATED CONTENT PREVIEW:</span>
+                <span className="font-bold text-indigo-500 block mb-1">XEM TRƯỚC NỘI DUNG ĐÃ DỊCH:</span>
                 <div className="p-3 rounded-xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-500/20 text-slate-800 dark:text-slate-200 max-h-32 overflow-y-auto font-medium">
                   {selectedItem.translatedContentPreview}
                 </div>
@@ -196,7 +196,7 @@ export const HistoryView: React.FC = () => {
                 onClick={() => setSelectedItem(null)}
                 className="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200"
               >
-                Close
+                Đóng
               </button>
             </div>
           </div>
