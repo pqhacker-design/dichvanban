@@ -154,10 +154,10 @@ export const TranslateTextView: React.FC<TranslateTextViewProps> = ({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 tracking-tight flex items-center gap-2">
-            <Languages className="w-7 h-7 text-indigo-600" /> Real-Time AI Text Translation
+            <Languages className="w-7 h-7 text-indigo-600" /> Dịch Văn Bản AI Trực Tiếp
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Instant token streaming translation powered by Gemini 3 Flash & Pro with domain customization.
+            Dịch luồng trực tiếp tức thì với Gemini 3 Flash & Pro, hỗ trợ tùy chỉnh chuyên ngành.
           </p>
         </div>
 
@@ -180,7 +180,7 @@ export const TranslateTextView: React.FC<TranslateTextViewProps> = ({
             onClick={swapLanguages}
             disabled={sourceLang === 'auto'}
             className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 transition-colors disabled:opacity-40"
-            title="Swap Languages"
+            title="Đảo ngược ngôn ngữ"
           >
             <ArrowRightLeft className="w-4 h-4" />
           </button>
@@ -204,16 +204,16 @@ export const TranslateTextView: React.FC<TranslateTextViewProps> = ({
       <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3 flex-wrap">
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 flex items-center gap-1">
-            <Sliders className="w-3.5 h-3.5 text-indigo-500" /> Mode:
+            <Sliders className="w-3.5 h-3.5 text-indigo-500" /> Mô hình:
           </span>
           <select
             value={selectedModel}
             onChange={(e) => setSelectedModel(e.target.value as GeminiModelId)}
             className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 focus:outline-none"
           >
-            <option value="gemini-3.6-flash">Flash 3.6 (Fastest)</option>
-            <option value="gemini-3.1-pro-preview">Pro 3.1 (High Reasoning)</option>
-            <option value="gemini-3.6-flash-thinking">Thinking High (Math/Legal)</option>
+            <option value="gemini-3.6-flash">Flash 3.6 (Nhanh nhất)</option>
+            <option value="gemini-3.1-pro-preview">Pro 3.1 (Lập luận cao)</option>
+            <option value="gemini-3.6-flash-thinking">Thinking High (Toán/Pháp lý)</option>
           </select>
 
           <select
@@ -221,15 +221,15 @@ export const TranslateTextView: React.FC<TranslateTextViewProps> = ({
             onChange={(e) => setSelectedDomain(e.target.value as TranslationDomain)}
             className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200 focus:outline-none"
           >
-            <option value="general">Domain: General</option>
-            <option value="academic">Domain: Academic</option>
-            <option value="education">Domain: Education</option>
-            <option value="business">Domain: Business</option>
-            <option value="legal">Domain: Legal</option>
-            <option value="medical">Domain: Medical</option>
-            <option value="technical">Domain: Technical</option>
-            <option value="marketing">Domain: Marketing</option>
-            <option value="programming">Domain: Code / Software</option>
+            <option value="general">Lĩnh vực: Chung</option>
+            <option value="academic">Lĩnh vực: Học thuật</option>
+            <option value="education">Lĩnh vực: Giáo dục</option>
+            <option value="business">Lĩnh vực: Kinh doanh</option>
+            <option value="legal">Lĩnh vực: Pháp lý</option>
+            <option value="medical">Lĩnh vực: Y tế</option>
+            <option value="technical">Lĩnh vực: Kỹ thuật</option>
+            <option value="marketing">Lĩnh vực: Marketing</option>
+            <option value="programming">Lĩnh vực: Lập trình / Mã nguồn</option>
           </select>
         </div>
 
@@ -240,11 +240,11 @@ export const TranslateTextView: React.FC<TranslateTextViewProps> = ({
         >
           {isStreaming ? (
             <>
-              <RotateCcw className="w-4 h-4 animate-spin" /> Translating...
+              <RotateCcw className="w-4 h-4 animate-spin" /> Đang dịch...
             </>
           ) : (
             <>
-              <Sparkles className="w-4 h-4" /> Translate Text
+              <Sparkles className="w-4 h-4" /> Dịch Văn Bản
             </>
           )}
         </button>
@@ -257,19 +257,19 @@ export const TranslateTextView: React.FC<TranslateTextViewProps> = ({
           <textarea
             value={sourceText}
             onChange={(e) => setSourceText(e.target.value)}
-            placeholder="Type or paste your text here to translate..."
+            placeholder="Nhập hoặc dán văn bản cần dịch vào đây..."
             className="w-full h-full bg-transparent resize-none text-sm text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none"
           />
           <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400 font-medium">
             <span>
-              {sourceText.length} characters | {sourceText.trim() ? sourceText.trim().split(/\s+/).length : 0} words
+              {sourceText.length} ký tự | {sourceText.trim() ? sourceText.trim().split(/\s+/).length : 0} từ
             </span>
             {sourceText && (
               <button
                 onClick={() => setSourceText('')}
                 className="text-slate-400 hover:text-red-500 transition-colors"
               >
-                Clear
+                Xóa sạch
               </button>
             )}
           </div>
@@ -282,15 +282,15 @@ export const TranslateTextView: React.FC<TranslateTextViewProps> = ({
               translatedText
             ) : (
               <span className="text-slate-400 italic text-xs">
-                {isStreaming ? 'AI is translating...' : 'Translation will stream live here...'}
+                {isStreaming ? 'AI đang dịch luồng...' : 'Bản dịch sẽ hiển thị trực tiếp tại đây...'}
               </span>
             )}
           </div>
 
           <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
             <span>
-              {translatedText.length} characters |{' '}
-              {translatedText.trim() ? translatedText.trim().split(/\s+/).length : 0} words
+              {translatedText.length} ký tự |{' '}
+              {translatedText.trim() ? translatedText.trim().split(/\s+/).length : 0} từ
             </span>
 
             <div className="flex items-center gap-2">
@@ -300,7 +300,7 @@ export const TranslateTextView: React.FC<TranslateTextViewProps> = ({
                 className={`p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ${
                   isSpeaking ? 'text-indigo-600' : 'text-slate-500'
                 }`}
-                title="Listen to translation"
+                title="Nghe bản đọc"
               >
                 <Volume2 className="w-4 h-4" />
               </button>
@@ -309,7 +309,7 @@ export const TranslateTextView: React.FC<TranslateTextViewProps> = ({
                 onClick={handleCopy}
                 disabled={!translatedText}
                 className="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                title="Copy translation"
+                title="Sao chép bản dịch"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
               </button>
