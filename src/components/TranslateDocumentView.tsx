@@ -108,13 +108,14 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
   const handleExport = async (format: 'docx' | 'pdf' | 'txt' | 'html' | 'md') => {
     if (!activeDoc) return;
     try {
+      const baseTitle = activeDoc.fileName.replace(/\.[^/.]+$/, '');
       const res = await fetch('/api/export', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           content: activeDoc.translatedContent,
           format,
-          title: activeDoc.fileName.replace(/\.[^/.]+$/, '') + `_${activeDoc.targetLang}`,
+          title: `${baseTitle}_${activeDoc.targetLang}`,
         }),
       });
 
@@ -122,10 +123,21 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${activeDoc.fileName.replace(/\.[^/.]+$/, '')}_translated.${format}`;
+
+      let fileName = `${baseTitle}_${activeDoc.targetLang}.${format}`;
+      const disposition = res.headers.get('Content-Disposition');
+      if (disposition && disposition.includes("filename*=UTF-8''")) {
+        const match = disposition.match(/filename\*=UTF-8''([^;]+)/i);
+        if (match && match[1]) {
+          fileName = decodeURIComponent(match[1]);
+        }
+      }
+
+      a.download = fileName;
       document.body.appendChild(a);
       a.click();
       a.remove();
+      window.URL.revokeObjectURL(url);
     } catch (e) {
       console.error('Export download error:', e);
     }
@@ -144,10 +156,10 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-800 dark:text-slate-100 tracking-tight flex items-center gap-2">
-            <FileText className="w-7 h-7 text-indigo-600" /> Multi-Format Document Translation
+            <FileText className="w-7 h-7 text-indigo-600" /> Dịch Tài Liệu Đa Định Dạng
           </h1>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Preserves font styles, headings, tables, code syntax, math formulas, and document layout.
+            Bảo toàn định dạng phông chữ, tiêu đề, bảng biểu, mã lệnh, công thức toán và bố cục gốc.
           </p>
         </div>
 
@@ -186,16 +198,16 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
               <Upload className="w-8 h-8" />
             </div>
             <h3 className="mt-4 text-base font-bold text-slate-800 dark:text-slate-200">
-              Drag & Drop your document files here
+              Kéo & thả tệp tài liệu của bạn vào đây
             </h3>
             <p className="text-xs text-slate-400 mt-1">
-              Supports DOCX, PDF, TXT, Markdown, HTML, Excel, PowerPoint, ODT & RTF (Max 50MB per file)
+              Hỗ trợ DOCX, PDF, TXT, Markdown, HTML, Excel, PowerPoint, ODT & RTF (Tối đa 50MB/tệp)
             </p>
             <button
               type="button"
               className="mt-4 px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-semibold shadow-md shadow-indigo-600/20 hover:bg-indigo-700 transition-colors"
             >
-              Select Files
+              Chọn Tệp Tài Liệu
             </button>
           </div>
 
@@ -203,12 +215,12 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
           {files.length > 0 && (
             <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 space-y-3">
               <div className="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300">
-                <span>Selected Queue ({files.length} files)</span>
+                <span>Hàng Chờ Đã Chọn ({files.length} tệp)</span>
                 <button
                   onClick={() => setFiles([])}
                   className="text-red-500 hover:underline text-[11px]"
                 >
-                  Clear Queue
+                  Xóa Hàng Chờ
                 </button>
               </div>
 
@@ -243,13 +255,13 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
         {/* Translation Configuration Sidebar */}
         <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm space-y-5">
           <h3 className="text-sm font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2">
-            <Sliders className="w-4 h-4 text-indigo-500" /> Translation Parameters
+            <Sliders className="w-4 h-4 text-indigo-500" /> Thông Số Dịch Thuật
           </h3>
 
           {/* Languages */}
           <div className="space-y-3 text-xs">
             <div>
-              <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Source Language</label>
+              <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Ngôn Ngữ Nguồn</label>
               <select
                 value={sourceLang}
                 onChange={(e) => setSourceLang(e.target.value)}
@@ -265,7 +277,7 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
             </div>
 
             <div>
-              <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Target Language</label>
+              <label className="font-semibold text-slate-600 dark:text-slate-400 block mb-1">Ngôn Ngữ Đích</label>
               <select
                 value={targetLang}
                 onChange={(e) => setTargetLang(e.target.value)}
@@ -283,7 +295,7 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
 
           {/* AI Model Selector */}
           <div className="space-y-2">
-            <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 block">Gemini AI Model</label>
+            <label className="text-xs font-semibold text-slate-600 dark:text-slate-400 block">Mô Hình AI Gemini</label>
             <div className="grid grid-cols-1 gap-2 text-xs">
               <button
                 type="button"
@@ -298,7 +310,7 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
                   <p className="flex items-center gap-1.5">
                     <Zap className="w-3.5 h-3.5 text-amber-500" /> Gemini 3.6 Flash
                   </p>
-                  <p className="text-[10px] text-slate-400 font-normal">Fast, high throughput</p>
+                  <p className="text-[10px] text-slate-400 font-normal">Tốc độ cực nhanh, phản hồi tức thì</p>
                 </div>
                 {selectedModel === 'gemini-3.6-flash' && <Check className="w-4 h-4 text-indigo-600" />}
               </button>
@@ -316,7 +328,7 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
                   <p className="flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-indigo-500" /> Gemini 3.1 Pro
                   </p>
-                  <p className="text-[10px] text-slate-400 font-normal">Deep reasoning & complex layout</p>
+                  <p className="text-[10px] text-slate-400 font-normal">Lập luận sâu & chuẩn bố cục phức tạp</p>
                 </div>
                 {selectedModel === 'gemini-3.1-pro-preview' && <Check className="w-4 h-4 text-indigo-600" />}
               </button>
@@ -334,7 +346,7 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
                   <p className="flex items-center gap-1.5">
                     <BookOpen className="w-3.5 h-3.5 text-violet-500" /> Gemini Thinking High
                   </p>
-                  <p className="text-[10px] text-slate-400 font-normal">Max logical rigor for legal/academic</p>
+                  <p className="text-[10px] text-slate-400 font-normal">Tư duy logic cao cho pháp lý & học thuật</p>
                 </div>
                 {selectedModel === 'gemini-3.6-flash-thinking' && <Check className="w-4 h-4 text-indigo-600" />}
               </button>
@@ -343,21 +355,21 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
 
           {/* Domain Style */}
           <div className="space-y-1.5 text-xs">
-            <label className="font-semibold text-slate-600 dark:text-slate-400 block">Translation Domain</label>
+            <label className="font-semibold text-slate-600 dark:text-slate-400 block">Lĩnh Vực Dịch Thuật</label>
             <select
               value={selectedDomain}
               onChange={(e) => setSelectedDomain(e.target.value as TranslationDomain)}
               className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 font-medium focus:outline-none"
             >
-              <option value="general">General (Standard Tone)</option>
-              <option value="academic">Academic / Research Paper</option>
-              <option value="education">Educational / Pedagogical</option>
-              <option value="business">Business & Executive</option>
-              <option value="legal">Legal & Contracts</option>
-              <option value="medical">Medical & Clinical</option>
-              <option value="technical">Technical & Engineering</option>
-              <option value="marketing">Marketing & Creative</option>
-              <option value="programming">Software & Code Documentation</option>
+              <option value="general">Chung (Văn phong chuẩn)</option>
+              <option value="academic">Học thuật / Bài báo nghiên cứu</option>
+              <option value="education">Giáo dục / Sư phạm</option>
+              <option value="business">Kinh doanh & Quản trị</option>
+              <option value="legal">Pháp lý & Hợp đồng</option>
+              <option value="medical">Y tế & Lâm sàng</option>
+              <option value="technical">Kỹ thuật & Công nghệ</option>
+              <option value="marketing">Marketing & Sáng tạo</option>
+              <option value="programming">Lập trình & Tài liệu phần mềm</option>
             </select>
           </div>
 
@@ -367,14 +379,14 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
               onClick={() => setShowPromptEditor(!showPromptEditor)}
               className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
             >
-              {showPromptEditor ? 'Hide Custom Prompt' : '+ Add Custom AI Prompt Directives'}
+              {showPromptEditor ? 'Ẩn Chỉ Thị AI Tùy Chỉnh' : '+ Thêm Chỉ Thị AI Tùy Chỉnh'}
             </button>
 
             {showPromptEditor && (
               <textarea
                 value={customPrompt}
                 onChange={(e) => setCustomPrompt(e.target.value)}
-                placeholder="Example: Keep proper nouns untranslated. Do not translate code blocks or URLs. Use formal Vietnamese phrasing."
+                placeholder="Ví dụ: Giữ nguyên tên riêng. Không dịch các khối code hoặc URL. Sử dụng văn phong trang trọng."
                 className="w-full h-24 mt-2 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-800 dark:text-slate-200 focus:outline-none"
               />
             )}
@@ -388,11 +400,11 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
           >
             {processing ? (
               <>
-                <RefreshCw className="w-4 h-4 animate-spin" /> Processing & Synthesizing...
+                <RefreshCw className="w-4 h-4 animate-spin" /> Đang Xử Lý & Tổng Hợp AI...
               </>
             ) : (
               <>
-                <Sparkles className="w-4 h-4" /> Start AI Translation
+                <Sparkles className="w-4 h-4" /> Bắt Đầu Dịch AI
               </>
             )}
           </button>
@@ -432,7 +444,7 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
                       : 'text-slate-500'
                   }`}
                 >
-                  <Columns className="w-3.5 h-3.5" /> Side-by-Side
+                  <Columns className="w-3.5 h-3.5" /> Song Ngữ Song Song
                 </button>
                 <button
                   onClick={() => setViewMode('translated')}
@@ -442,7 +454,7 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
                       : 'text-slate-500'
                   }`}
                 >
-                  <Eye className="w-3.5 h-3.5" /> Translated Only
+                  <Eye className="w-3.5 h-3.5" /> Chỉ Tệp Dịch
                 </button>
                 <button
                   onClick={() => setViewMode('original')}
@@ -452,7 +464,7 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
                       : 'text-slate-500'
                   }`}
                 >
-                  <Maximize2 className="w-3.5 h-3.5" /> Original Only
+                  <Maximize2 className="w-3.5 h-3.5" /> Chỉ Tệp Gốc
                 </button>
               </div>
 
@@ -461,7 +473,7 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
                 className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors flex items-center gap-1.5"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                {copied ? 'Copied' : 'Copy'}
+                {copied ? 'Đã chép' : 'Sao chép'}
               </button>
 
               {/* Export Dropdown buttons */}
@@ -498,7 +510,7 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
                 }`}
               >
                 <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-500 dark:text-slate-400">
-                  <span>ORIGINAL DOCUMENT ({getLanguageName(activeDoc.sourceLang)})</span>
+                  <span>TÀI LIỆU GỐC ({getLanguageName(activeDoc.sourceLang)})</span>
                   <span className="uppercase text-[10px] px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
                     {activeDoc.fileType}
                   </span>
@@ -518,7 +530,7 @@ export const TranslateDocumentView: React.FC<TranslateDocumentViewProps> = ({
               >
                 <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800 text-xs font-bold text-indigo-600 dark:text-indigo-400">
                   <span className="flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-500" /> TRANSLATED DOCUMENT ({getLanguageName(activeDoc.targetLang)})
+                    <Sparkles className="w-3.5 h-3.5 text-amber-500" /> TÀI LIỆU ĐÃ DỊCH ({getLanguageName(activeDoc.targetLang)})
                   </span>
                   <span className="text-[10px] px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 font-semibold border border-indigo-500/20">
                     {activeDoc.modelUsed}
