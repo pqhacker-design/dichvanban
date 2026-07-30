@@ -1,5 +1,16 @@
 import mammoth from 'mammoth';
 
+export function fixFilenameEncoding(filename: string): string {
+  if (!filename) return '';
+  try {
+    const decoded = Buffer.from(filename, 'latin1').toString('utf-8');
+    if (/[\u00C0-\u00FF]/.test(filename) && !decoded.includes('')) {
+      return decoded;
+    }
+  } catch {}
+  return filename;
+}
+
 export interface ParsedDocument {
   rawText: string;
   formattedContent: string; // Markdown or HTML representation
