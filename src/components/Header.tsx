@@ -78,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Quick Target Language */}
           <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
-            <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Target:</span>
+            <span className="text-xs font-medium text-slate-500 dark:text-slate-400">Đích:</span>
             <select
               value={targetLang}
               onChange={(e) => setTargetLang(e.target.value)}
@@ -97,7 +97,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={() => setDarkMode(!darkMode)}
             className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
-            title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            title={darkMode ? 'Chuyển sang chế độ Sáng' : 'Chuyển sang chế độ Tối'}
           >
             {darkMode ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-600" />}
           </button>
@@ -108,9 +108,9 @@ export const Header: React.FC<HeaderProps> = ({
               PRO
             </div>
             <div className="hidden sm:block text-left">
-              <p className="text-xs font-semibold text-slate-800 dark:text-slate-200 leading-none">Enterprise User</p>
+              <p className="text-xs font-semibold text-slate-800 dark:text-slate-200 leading-none">Thành viên Pro</p>
               <p className="text-[10px] text-slate-400 flex items-center gap-0.5">
-                <ShieldCheck className="w-3 h-3 text-indigo-400" /> Verified
+                <ShieldCheck className="w-3 h-3 text-indigo-400" /> Đã xác thực
               </p>
             </div>
           </div>
