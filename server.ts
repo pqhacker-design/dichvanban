@@ -3,7 +3,7 @@ import path from 'path';
 import multer from 'multer';
 import { createServer as createViteServer } from 'vite';
 import { translateText, translateTextStream, performOCRAndTranslate } from './src/server/geminiService';
-import { parseDocumentBuffer } from './src/server/documentParser';
+import { parseDocumentBuffer, fixFilenameEncoding } from './src/server/documentParser';
 import { generateExportContent } from './src/server/exportService';
 import { store } from './src/server/store';
 import { GeminiModelId, TranslationDomain } from './src/types';
@@ -203,7 +203,8 @@ app.post('/api/translate/document', upload.array('files', 10), async (req, res) 
     const results = [];
 
     for (const file of files) {
-      const parsed = await parseDocumentBuffer(file.buffer, file.originalname, file.mimetype);
+      const fixedName = fixFilenameEncoding(file.originalname);
+      const parsed = await parseDocumentBuffer(file.buffer, fixedName, file.mimetype);
 
       const translatedText = await translateText(
         parsed.formattedContent,
@@ -219,7 +220,7 @@ app.post('/api/translate/document', upload.array('files', 10), async (req, res) 
 
       const docItem = {
         id: 'doc-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
-        fileName: file.originalname,
+        fileName: fixedName,
         fileType: parsed.fileType,
         fileSize: file.size,
         uploadTime: new Date().toISOString(),
@@ -295,9 +296,15 @@ app.post('/api/export', async (req, res) => {
       return;
     }
 
-    const exportData = await generateExportContent(content, format, title || 'Translated_Document');
+    const cleanTitle = fixFilenameEncoding(title || 'Translated_Document');
+    const exportData = await generateExportContent(content, format, cleanTitle);
+    
+    const encodedFileName = encodeURIComponent(exportData.fileName);
     res.setHeader('Content-Type', exportData.mimeType);
-    res.setHeader('Content-Disposition', `attachment; filename="${exportData.fileName}"`);
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${encodedFileName}"; filename*=UTF-8''${encodedFileName}`
+    );
     res.send(exportData.buffer);
   } catch (error: any) {
     console.error('Export Error:', error);
@@ -320,9 +327,9 @@ async function startServer() {
     });
   }
 
-	app.listen(PORT, "0.0.0.0", () => {
-    	console.log(`Server running on port ${PORT}`);
-	});
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`AI Document Translator Pro running on http://localhost:${PORT}`);
+  });
 }
 
 startServer();
