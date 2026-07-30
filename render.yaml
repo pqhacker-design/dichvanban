@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: docvanban
+    name: dichvanban
     runtime: node
 
     # Gói miễn phí (có thể đổi thành starter hoặc standard nếu cần)
