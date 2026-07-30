@@ -32,15 +32,15 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const navItems = [
-    { id: 'dashboard' as NavTab, label: 'Dashboard', icon: LayoutDashboard, badge: null },
-    { id: 'document' as NavTab, label: 'Translate Document', icon: FileText, badge: 'PRO' },
-    { id: 'text' as NavTab, label: 'Translate Text', icon: Languages, badge: null },
-    { id: 'ocr' as NavTab, label: 'OCR Scanner', icon: ScanText, badge: 'AI' },
-    { id: 'history' as NavTab, label: 'History Log', icon: History, badge: null },
-    { id: 'glossary' as NavTab, label: 'Glossary & Rules', icon: BookMarked, badge: null },
-    { id: 'settings' as NavTab, label: 'Settings', icon: Settings, badge: null },
-    { id: 'api' as NavTab, label: 'API Settings', icon: KeyRound, badge: null },
-    { id: 'about' as NavTab, label: 'About', icon: Info, badge: null },
+    { id: 'dashboard' as NavTab, label: 'Bảng điều khiển', icon: LayoutDashboard, badge: null },
+    { id: 'document' as NavTab, label: 'Dịch tài liệu', icon: FileText, badge: 'PRO' },
+    { id: 'text' as NavTab, label: 'Dịch văn bản', icon: Languages, badge: null },
+    { id: 'ocr' as NavTab, label: 'Quét OCR hình ảnh', icon: ScanText, badge: 'AI' },
+    { id: 'history' as NavTab, label: 'Lịch sử dịch', icon: History, badge: null },
+    { id: 'glossary' as NavTab, label: 'Thuật ngữ & Quy tắc', icon: BookMarked, badge: null },
+    { id: 'settings' as NavTab, label: 'Cài đặt', icon: Settings, badge: null },
+    { id: 'api' as NavTab, label: 'Cấu hình API', icon: KeyRound, badge: null },
+    { id: 'about' as NavTab, label: 'Giới thiệu', icon: Info, badge: null },
   ];
 
   return (
@@ -101,14 +101,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => 
       {/* Model Indicator Footer */}
       <div className="p-4 m-3 rounded-2xl bg-slate-800/50 border border-slate-800 backdrop-blur-sm">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-semibold text-slate-300">Gemini Engine</span>
+          <span className="text-xs font-semibold text-slate-300">Động cơ AI Gemini</span>
           <span className="flex h-2 w-2 relative">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
         </div>
         <p className="text-[11px] text-slate-400 leading-tight">
-          Format preservation & multi-model AI document synthesis active.
+          Giữ nguyên định dạng & tổng hợp tài liệu AI đa mô hình đang hoạt động.
         </p>
       </div>
     </aside>
